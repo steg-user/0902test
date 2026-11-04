@@ -4,8 +4,11 @@ name: DEPLOY-WORKFLOW
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
-        run: echo "Hello GitHub Actions"
+      - name: Deploy Start
+        run: |
+          echo "Deploy started"
+          sleep 30
+          echo "Deploy completed"
