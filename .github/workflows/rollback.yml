@@ -1,4 +1,4 @@
-name: ROLLBACK-WORKFLOW
+name: ROLLBACK-WORKFLOW-PARAMETER
 
 'on':
   workflow_dispatch:
