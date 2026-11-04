@@ -2,10 +2,22 @@ name: ROLLBACK-WORKFLOW
 
 'on':
   workflow_dispatch:
+    inputs:
+      target_version:
+        description: 'Rollback target version'
+        required: true
+        default: 'v1.0.0'
+        type: string
 
 jobs:
-  build:
+  rollback:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
-        run: echo "Hello GitHub Actions"
+      - name: Rollback Start
+        env:
+          TARGET_VERSION: ${{ inputs.target_version }}
+        run: |
+          echo "Rollback target: $TARGET_VERSION"
+          echo "Rollback started"
+          sleep 10
+          echo "Rollback completed"
