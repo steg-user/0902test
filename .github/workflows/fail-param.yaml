@@ -1,0 +1,27 @@
+name: PARAMETER-VALIDATION-FAIL-WORKFLOW
+
+'on':
+  workflow_dispatch:
+    inputs:
+      target_version:
+        description: 'Required target version'
+        required: false
+        type: string
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Required Parameter
+        env:
+          TARGET_VERSION: ${{ inputs.target_version }}
+        run: |
+          echo "Validating target_version..."
+
+          if [ -z "$TARGET_VERSION" ]; then
+            echo "::error::Required parameter target_version is missing"
+            exit 1
+          fi
+
+          echo "Target version: $TARGET_VERSION"
+          echo "Validation completed successfully"
