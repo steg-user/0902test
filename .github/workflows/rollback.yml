@@ -1,12 +1,16 @@
-name: ROLLBACK-WORKFLOW-PARAMETER
+name: ROLLBACK-WORKFLOW
 
 'on':
   workflow_dispatch:
     inputs:
-      target_version:
-        description: 'Rollback target version'
+      ticket_id:
+        description: 'Ticket ID (FIELD)'
         required: true
-        default: 'v1.0.0'
+        type: string
+
+      target_version:
+        description: 'Rollback Version (FIXED)'
+        required: true
         type: string
 
 jobs:
@@ -15,9 +19,15 @@ jobs:
     steps:
       - name: Rollback Start
         env:
+          TICKET_ID: ${{ inputs.ticket_id }}
           TARGET_VERSION: ${{ inputs.target_version }}
         run: |
-          echo "Rollback target: $TARGET_VERSION"
-          echo "Rollback started"
+          echo "================================"
+          echo "Rollback Started"
+          echo "Ticket ID: $TICKET_ID"
+          echo "Target Version: $TARGET_VERSION"
+          echo "================================"
+
           sleep 10
-          echo "Rollback completed"
+
+          echo "Rollback Completed"
